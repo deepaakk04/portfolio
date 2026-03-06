@@ -29,7 +29,7 @@ export default function Page() {
             <div className="flex-col flex flex-1 space-y-6 md:text-left text-center items-center md:items-start">
               <div className="flex items-center gap-5">
                 <span className="text-5xl font-bold tracking-tight sm:text-7xl xl:text-8xl/none">
-                  Hi, I'm
+                  Hi, I&apos;m
                 </span>
                 <HyperText
                   className="text-5xl font-bold tracking-tight sm:text-7xl xl:text-8xl/none text-primary"

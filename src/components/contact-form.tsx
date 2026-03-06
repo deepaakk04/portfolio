@@ -100,7 +100,7 @@ export function ContactForm({ trigger }: ContactFormProps) {
                                     </motion.div>
                                     <h3 className="text-2xl font-bold text-foreground">Message Sent!</h3>
                                     <p className="mt-2 text-muted-foreground">
-                                        Thanks for reaching out. I'll get back to you soon.
+                                        Thanks for reaching out. I&apos;ll get back to you soon.
                                     </p>
                                 </div>
                             ) : (
@@ -108,7 +108,7 @@ export function ContactForm({ trigger }: ContactFormProps) {
                                     <div>
                                         <h2 className="text-3xl font-bold text-foreground">Get in Touch</h2>
                                         <p className="mt-2 text-muted-foreground">
-                                            Have a project in mind? Let's build something amazing together.
+                                            Have a project in mind? Let&apos;s build something amazing together.
                                         </p>
                                     </div>
 
