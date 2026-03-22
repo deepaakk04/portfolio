@@ -2,13 +2,21 @@
 # Clone blog content from the blogs repo before building
 # This runs during Netlify build so blog posts are available at build time
 
+REPO_URL="https://github.com/deepaakk04/blogs.git"
+if [ -n "$GITHUB_TOKEN" ]; then
+  REPO_URL="https://${GITHUB_TOKEN}@github.com/deepaakk04/blogs.git"
+fi
+
 if [ -d "content" ] && [ -d "content/.git" ]; then
   echo "Content repo already exists, pulling latest..."
-  cd content && git pull origin main && cd ..
+  cd content
+  git remote set-url origin $REPO_URL
+  git pull origin main
+  cd ..
 else
   echo "Cloning blog content..."
   rm -rf content
-  git clone https://github.com/deepaakk04/blogs.git content
+  git clone $REPO_URL content
 fi
 
 echo "Blog content ready!"
