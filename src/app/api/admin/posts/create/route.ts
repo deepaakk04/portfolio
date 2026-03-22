@@ -15,7 +15,20 @@ export async function POST(request: NextRequest) {
         };
 
         await createPost(slug, metadata, content);
-        return NextResponse.json({ success: true });
+
+        // Auto-Push to GitHub
+        let gitWarning = null;
+        try {
+            const { syncWithGithub } = await import('@/lib/git');
+            const result = await syncWithGithub(`create post ${slug}`);
+            if (!result.success) {
+                gitWarning = result.error;
+            }
+        } catch (e: any) {
+            gitWarning = e.message;
+        }
+
+        return NextResponse.json({ success: true, gitWarning });
     } catch (error) {
         console.error("Error creating post:", error);
         return NextResponse.json({ error: "Failed to create post" }, { status: 500 });

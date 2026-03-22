@@ -64,7 +64,20 @@ export async function DELETE(
 
     try {
         await deletePost(params.slug);
-        return NextResponse.json({ success: true });
+
+        // Auto-Push to GitHub
+        let gitWarning = null;
+        try {
+            const { syncWithGithub } = await import('@/lib/git');
+            const result = await syncWithGithub(`delete post ${params.slug}`);
+            if (!result.success) {
+                gitWarning = result.error;
+            }
+        } catch (e: any) {
+            gitWarning = e.message;
+        }
+
+        return NextResponse.json({ success: true, gitWarning });
     } catch (error) {
         return NextResponse.json({ error: "Failed to delete post" }, { status: 500 });
     }
