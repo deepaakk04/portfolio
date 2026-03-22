@@ -87,10 +87,24 @@ export default function Navbar() {
                     rel="noopener noreferrer"
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12"
+                      "size-12",
+                      isScrolled && "w-auto px-3"
                     )}
                   >
-                    <social.icon className="size-4" />
+                    <social.icon className="size-4 shrink-0" />
+                    <AnimatePresence>
+                      {isScrolled && (
+                        <motion.span
+                          initial={{ opacity: 0, width: 0 }}
+                          animate={{ opacity: 1, width: "auto" }}
+                          exit={{ opacity: 0, width: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="ml-2 overflow-hidden whitespace-nowrap"
+                        >
+                          {name}
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>

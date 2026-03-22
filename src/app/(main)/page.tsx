@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import Marquee from "@/components/magicui/marquee";
 import WordRotate from "@/components/magicui/word-rotate";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import { GlobeIcon, DownloadIcon } from "lucide-react";
@@ -41,7 +40,7 @@ export default function Page() {
                 <span>I am a</span>
                 <WordRotate
                   className="font-bold text-black dark:text-white"
-                  words={["Product Manager", "Product Strategist", "Technical Program Manager", "Data-Driven Product Manager", "Technical Project Manager", "Business Analyst"]}
+                  words={["Technology Consultant", "Product Manager", "Technical Project Manager", "Business Analyst"]}
                 />
               </div>
               <BlurFadeText
@@ -228,17 +227,30 @@ export default function Page() {
               </p>
             </div>
           </BlurFade>
-          <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background py-4 sm:py-10">
-            <Marquee pauseOnHover reverse className="[--duration:20s]">
-              {DATA.skills.map((skill) => (
-                <Badge key={skill} className="mx-2 text-xl py-2 px-4">
-                  {skill}
-                </Badge>
+          <BlurFade delay={BLUR_FADE_DELAY * 10}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {DATA.skillGroups.map((group) => (
+                <div
+                  key={group.title}
+                  className="group relative rounded-xl border border-border bg-card p-5 space-y-3 shadow-sm hover:shadow-lg hover:border-foreground/20 transition-all duration-300"
+                >
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                    {group.title}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {group.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="inline-flex items-center rounded-md border border-border bg-muted/60 px-2.5 py-1 text-[13px] font-medium text-foreground transition-colors hover:bg-foreground hover:text-background"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               ))}
-            </Marquee>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
-          </div>
+            </div>
+          </BlurFade>
         </div>
       </section>
       <section id="projects" className="px-4 md:px-8">
@@ -258,12 +270,11 @@ export default function Page() {
               </p>
             </div>
           </BlurFade>
-          <BentoGrid className="mx-auto grid-cols-1 md:grid-cols-4 gap-4">
+          <BentoGrid className="mx-auto grid-cols-1 md:grid-cols-2 gap-6">
             {DATA.projects.map((project: any, id) => (
               <BlurFade
                 key={project.title}
                 delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-                className={id === 0 || id === 3 ? "col-span-1 md:col-span-2" : "col-span-1"}
               >
                 <BentoCard
                   name={project.title}
@@ -278,18 +289,18 @@ export default function Page() {
                         playsInline
                         className="absolute inset-0 h-full w-full object-cover opacity-10 transition-all duration-300 group-hover:opacity-20"
                       />
-                    ) : (
+                    ) : project.image ? (
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="absolute inset-0 h-full w-full object-cover opacity-10 transition-all duration-300 group-hover:opacity-20"
+                        className="absolute inset-0 h-full w-full object-contain p-8 opacity-5 transition-all duration-300 group-hover:opacity-10"
                       />
-                    )
+                    ) : null
                   }
                   Icon={GlobeIcon}
                   description={project.description}
-                  href={project.href}
-                  cta="View Project"
+                  href={project.href || "#"}
+                  cta={project.links?.[0]?.type || "View Project"}
                 />
               </BlurFade>
             ))}

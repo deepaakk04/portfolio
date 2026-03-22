@@ -11,22 +11,42 @@ export async function syncWithGithub(message: string): Promise<{ success: boolea
         console.log("Starting Git Sync...");
         const contentDir = path.join(process.cwd(), 'content');
 
-        // 1. Add all changes in content directory
+        // 1. Stage all changes
         await execAsync('git add .', contentDir);
 
-        // 2. Commit
+        // 2. Check if there is actually anything new to commit
+        const { stdout: statusOut } = await execAsync('git status --porcelain', contentDir);
+        if (!statusOut.trim()) {
+            console.log("Nothing to commit — skipping.");
+            return { success: true };
+        }
+
+        // 3. Commit
         await execAsync(`git commit -m "content: ${message}"`, contentDir);
 
-        // 3. Push
-        // If GITHUB_TOKEN and GITHUB_REPO are present, use them for explicitly authenticated push
+        // 4. Push
         if (process.env.GITHUB_TOKEN && process.env.GITHUB_REPO) {
             console.log("Using Authenticated Push via ENV...");
             const remoteUrl = `https://${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPO}.git`;
-            await execAsync(`git push ${remoteUrl}`, contentDir);
+            
+            try {
+                // Try to push first
+                await execAsync(`git push ${remoteUrl} main`, contentDir);
+            } catch (pushErr) {
+                console.log("Push rejected, attempting to pull with rebase...");
+                // If rejected, fetch and rebase, then push again
+                await execAsync(`git pull --rebase ${remoteUrl} main`, contentDir);
+                await execAsync(`git push ${remoteUrl} main`, contentDir);
+            }
         } else {
-            // Fallback to default configured credentials (SSH/HTTPS)
             console.log("Using system credentials for push...");
-            await execAsync('git push', contentDir);
+            try {
+                await execAsync('git push', contentDir);
+            } catch (pushErr) {
+                console.log("Push rejected, attempting to pull with rebase...");
+                await execAsync('git pull --rebase', contentDir);
+                await execAsync('git push', contentDir);
+            }
         }
 
         console.log("Git Sync Complete!");
@@ -34,7 +54,7 @@ export async function syncWithGithub(message: string): Promise<{ success: boolea
     } catch (error: any) {
         console.error("Git Sync Failed:", error);
 
-        // If nothing to commit, that's fine
+        // Treat "nothing to commit" as a success
         if (error.stdout && error.stdout.includes('nothing to commit')) {
             return { success: true };
         }

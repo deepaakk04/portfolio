@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { BlogCard } from "./blog-card";
-import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -40,62 +39,64 @@ export function BlogPosts({ posts }: BlogPostsProps) {
 
     return (
         <div className="space-y-10">
-            {/* Search & Filters */}
-            <div className="flex flex-col gap-6">
-                <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                    <Input
-                        placeholder="Search articles..."
-                        className="pl-9 h-11 bg-muted/50"
+            {/* ── Category Tabs + Search (like JetBrains) ── */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+
+                {/* Category Tabs */}
+                <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide pb-1">
+                    <button
+                        onClick={() => setSelectedTag(null)}
+                        className={cn(
+                            "px-4 py-2 text-sm font-medium rounded-full whitespace-nowrap transition-all",
+                            selectedTag === null
+                                ? "bg-foreground text-background"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                        )}
+                    >
+                        All
+                    </button>
+                    {allTags.map((tag) => (
+                        <button
+                            key={tag}
+                            onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+                            className={cn(
+                                "px-4 py-2 text-sm font-medium rounded-full whitespace-nowrap transition-all",
+                                selectedTag === tag
+                                    ? "bg-foreground text-background"
+                                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                            )}
+                        >
+                            {tag}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Search */}
+                <div className="relative group shrink-0 w-full md:w-56">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground group-focus-within:text-foreground transition-colors" />
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        className="w-full bg-muted/50 border border-border rounded-full py-2 pl-9 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20 transition-all placeholder:text-muted-foreground"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 </div>
-
-                {allTags.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                        <button
-                            onClick={() => setSelectedTag(null)}
-                            className={cn(
-                                "px-3 py-1 text-sm rounded-full transition-colors border",
-                                selectedTag === null
-                                    ? "bg-foreground text-background border-foreground font-medium"
-                                    : "bg-background text-muted-foreground border-border hover:border-foreground/50"
-                            )}
-                        >
-                            All
-                        </button>
-                        {allTags.map((tag) => (
-                            <button
-                                key={tag}
-                                onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                                className={cn(
-                                    "px-3 py-1 text-sm rounded-full transition-colors border",
-                                    selectedTag === tag
-                                        ? "bg-foreground text-background border-foreground font-medium"
-                                        : "bg-background text-muted-foreground border-border hover:border-foreground/50"
-                                )}
-                            >
-                                {tag}
-                            </button>
-                        ))}
-                    </div>
-                )}
             </div>
 
-            {/* Grid */}
+            {/* ── Posts Grid (4 columns like JetBrains/Oracle) ── */}
             {filteredPosts.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {filteredPosts.map((post) => (
                         <BlogCard key={post.slug} post={post} />
                     ))}
                 </div>
             ) : (
-                <div className="text-center py-20 text-muted-foreground">
-                    <p>No posts found matching your criteria</p>
+                <div className="text-center py-24 text-muted-foreground">
+                    <p className="text-lg font-medium">No articles found</p>
                     <button
                         onClick={() => { setSearch(""); setSelectedTag(null) }}
-                        className="text-primary hover:underline mt-2 text-sm"
+                        className="text-primary hover:text-primary/80 font-semibold mt-3 text-sm transition-colors"
                     >
                         Clear filters
                     </button>

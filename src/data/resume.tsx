@@ -10,7 +10,7 @@ export interface ResumeData {
   description: string;
   summary: string;
   avatarUrl: string;
-  skills: string[];
+  skillGroups: { title: string; skills: string[] }[];
   navbar: {
     href: string;
     icon: any;
@@ -96,29 +96,31 @@ export const DATA: ResumeData = {
   location: "Mumbai, Maharashtra",
   locationLink: "https://www.google.com/maps/place/mumbai",
   description:
-    "& an MBA Candidate. I leverage data and engineering expertise to build scalable, user-centric products that drive business growth.",
+    "MBA Candidate at IIT Roorkee | Technologist turned Business Leader | Open to Consulting, Product & Technology Management",
   summary:
     "I am a **Product Manager**  with a deep technical foundation in **Data Engineering** and **Computer Science**.\n\nCurrently pursuing an **MBA at IIT Roorkee**, I combine business acumen with over **3 years of hands-on engineering experience** to build data-driven products. My background allows me to seamlessly bridge the gap between stakeholders and engineering teams, translating complex business requirements into scalable technical solutions.\n\nI excel at using **data analytics** to uncover user needs, optimize product roadmaps, and drive measurable growth. I am passionate about solving real-world problems through innovative, user-centric technology.",
   avatarUrl: "/mee.jpg",
-  skills: [
-    "Product Strategy",
-    "User Research",
-    "Agile & Scrum",
-    "Data Analysis",
-    "A/B Testing",
-    "Figma",
-    "SQL",
-    "React",
-    "Next.js",
-    "Typescript",
-    "Node.js",
-    "Postgres",
-    "Docker",
-    "Kubernetes",
-  ],
+  skillGroups: [
+    {
+      title: "Data & Analytics",
+      skills: ["SQL", "Snowflake", "dbt", "Power BI", "Python", "Azure Data Factory"],
+    },
+    {
+      title: "Cloud & Engineering",
+      skills: ["AWS", "Azure", "Docker", "Talend", "Airflow"],
+    },
+    {
+      title: "Product & Strategy",
+      skills: ["Roadmapping", "Agile/Scrum", "Stakeholder Management", "A/B Testing", "User Research"],
+    },
+    {
+      title: "Tools",
+      skills: ["Figma", "Jira", "Confluence", "Excel", "Tableau"],
+    },
+  ] as { title: string; skills: string[] }[],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog", openInNewTab: true },
+    { href: "/blog", icon: NotebookIcon, label: "Blog" },
   ],
   contact: {
     email: "deepaksingh4.iitr@gmail.com",
@@ -126,7 +128,7 @@ export const DATA: ResumeData = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://dub.sh/dillion-github",
+        url: "https://github.com/deepaakk04/",
         icon: Icons.github,
 
         navbar: true,
@@ -143,14 +145,14 @@ export const DATA: ResumeData = {
         url: "https://dub.sh/dillion-twitter",
         icon: Icons.x,
 
-        navbar: true,
+        navbar: false,
       },
       Reddit: {
         name: "Reddit",
         url: "https://www.reddit.com/",
         icon: Icons.reddit,
 
-        navbar: true,
+        navbar: false,
       },
       email: {
         name: "Send Email",
@@ -274,22 +276,7 @@ export const DATA: ResumeData = {
       start: "2017",
       end: "2021",
     },
-    {
-      school: "RJ Junior College, Mumbai (Maharashtra State Board)",
-      href: "https://rjcollege.edu.in",
-      degree: "Class XII",
-      logoUrl: "/rj.png",
-      start: "2017",
-      end: "2017",
-    },
-    {
-      school: "K.V.K Ghatkopar Sarvajanik School (Maharashtra State Board)",
-      href: "https://kvkghatkopar.in/home",
-      degree: "Class X",
-      logoUrl: "/kvk.png",
-      start: "2015",
-      end: "2015",
-    },
+
   ],
   projects: [
     {
@@ -320,98 +307,22 @@ export const DATA: ResumeData = {
       video: "",
     },
     {
-      title: "Magic UI",
-      href: "https://magicui.design",
-      dates: "June 2023 - Present",
+      title: "Placement Portal — IIT Roorkee",
+      href: "",
+      dates: "2024 - Present",
       active: true,
       description:
-        "Designed, developed and sold animated UI components for developers.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Stripe",
-        "Shadcn UI",
-        "Magic UI",
-      ],
+        "Identified inefficiencies in the manual placement process and built a centralised Placement Portal with Role-Based Access Control (RBAC). Features include one-time student profile registration, unified resume verification, one-click job applications, and real-time application status tracking — eliminating redundant data entry for 200+ students.",
+      technologies: ["React", "Node.js", "PostgreSQL", "RBAC"],
       links: [
         {
-          type: "Website",
-          href: "https://magicui.design",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/magicuidesign/magicui",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "https://cdn.magicui.design/bento-grid.mp4",
-    },
-    {
-      title: "llm.report",
-      href: "https://llm.report",
-      dates: "April 2023 - September 2023",
-      active: true,
-      description:
-        "Developed an open-source logging and analytics platform for OpenAI: Log your ChatGPT API requests, analyze costs, and improve your prompts.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Magic UI",
-        "Stripe",
-        "Cloudflare Workers",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://llm.report",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/dillionverma/llm.report",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "https://cdn.llm.report/openai-demo.mp4",
-    },
-    {
-      title: "Automatic Chat",
-      href: "https://automatic.chat",
-      dates: "April 2023 - March 2024",
-      active: true,
-      description:
-        "Developed an AI Customer Support Chatbot which automatically responds to customer support tickets using the latest GPT models.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Shadcn UI",
-        "Magic UI",
-        "Stripe",
-        "Cloudflare Workers",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://automatic.chat",
+          type: "In Production",
+          href: "",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "",
-      video:
-        "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
+      image: "/iitr.svg",
+      video: "",
     },
   ],
   hackathons: [

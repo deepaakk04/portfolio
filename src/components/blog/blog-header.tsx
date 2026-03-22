@@ -1,52 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { DATA } from "@/data/resume";
-import { ArrowUpRight } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
+
+const CATEGORIES = [
+    { label: "Data Engineering & Architecture", href: "/blog?tag=data-engineering" },
+    { label: "Technology & Consulting", href: "/blog?tag=technology" },
+    { label: "Product Development & GenAI", href: "/blog?tag=product" },
+];
 
 export function BlogHeader() {
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-                {/* Custom Logo: Geek but Gentle */}
-                <Link
-                    href="/blog"
-                    className="flex items-center gap-3 hover:opacity-80 transition-opacity group"
-                    aria-label="Geek but Gentle Blog"
-                >
-                    <div className="relative flex items-center justify-center font-serif italic font-bold text-3xl h-10 w-16 text-foreground">
-                        {/* Left 'g' */}
-                        <span className="absolute left-0 z-10 group-hover:-translate-x-0.5 transition-transform">g</span>
-
-                        {/* Middle 'b' (overlapping) */}
-                        <span className="absolute text-primary/20 text-4xl z-0 transform -translate-y-1 rotate-12 group-hover:rotate-0 transition-all duration-500">b</span>
-
-                        {/* Right 'g' (flipped) */}
-                        <span className="absolute right-0 z-10 transform scale-x-[-1] group-hover:translate-x-0.5 transition-transform">g</span>
-                    </div>
-
-                    <div className="hidden sm:flex flex-col -space-y-1">
-                        <span className="font-semibold tracking-tight text-lg leading-none">
-                            geek but gentle
-                        </span>
-                        <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-medium">
-                            The Blog
-                        </span>
-                    </div>
-                </Link>
-
-                {/* Right Side Actions */}
-                <div className="flex items-center gap-4">
+        <header className="sticky top-0 z-50 w-full">
+            {/* ── DARK TOP BAR ── */}
+            <div className="w-full bg-slate-900 text-white">
+                <div className="w-full max-w-[1400px] mx-auto px-6 md:px-10 h-12 flex items-center justify-between">
+                    {/* Logo */}
                     <Link
-                        href="/"
-                        className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1 group"
+                        href="/blog"
+                        className="flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                        aria-label="The Intelligence Stack Blog"
                     >
-                        Visit Author
-                        <ArrowUpRight className="size-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                        <span className="font-bold text-lg tracking-tight opacity-50">[</span>
+                        <span className="font-extrabold text-[13px] tracking-[0.12em] mt-px whitespace-nowrap">THE INTELLIGENCE STACK</span>
+                        <span className="font-bold text-lg tracking-tight opacity-50">]</span>
                     </Link>
-                    <div className="w-px h-6 bg-border" />
-                    <ModeToggle />
+
+                    {/* Right Actions */}
+                    <div className="flex items-center gap-5">
+                        <Link
+                            href="/"
+                            className="text-xs font-medium text-white/60 hover:text-white transition-colors hidden sm:block"
+                        >
+                            About the Author
+                        </Link>
+                        <ModeToggle />
+                    </div>
+                </div>
+            </div>
+
+            {/* ── CATEGORY SUB-NAV ── */}
+            <div className="w-full bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+                <div className="w-full max-w-[1400px] mx-auto px-6 md:px-10 h-14 flex items-center gap-8 overflow-x-auto scrollbar-hide">
+                    {CATEGORIES.map((cat) => (
+                        <Link
+                            key={cat.label}
+                            href={cat.href}
+                            className="text-[12px] font-semibold tracking-wider text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white uppercase whitespace-nowrap transition-colors relative after:absolute after:-bottom-[17px] after:left-0 after:w-full after:h-[2px] after:bg-slate-900 dark:after:bg-white after:opacity-0 hover:after:opacity-100 after:transition-opacity"
+                        >
+                            {cat.label}
+                        </Link>
+                    ))}
                 </div>
             </div>
         </header>
