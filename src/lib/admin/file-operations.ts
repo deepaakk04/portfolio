@@ -103,14 +103,20 @@ export async function uploadImage(
     postSlug: string,
     file: File
 ): Promise<string> {
-    const imageDir = path.join(process.cwd(), 'public', 'blog', 'images', postSlug);
-    await fs.mkdir(imageDir, { recursive: true });
-
     const fileName = file.name.replace(/[^a-z0-9.-]/gi, '-').toLowerCase();
-    const imagePath = path.join(imageDir, fileName);
-
     const buffer = Buffer.from(await file.arrayBuffer());
-    await fs.writeFile(imagePath, buffer);
+
+    // 1. Save to Next.js public directory for immediate local development serving
+    const publicImageDir = path.join(process.cwd(), 'public', 'blog', 'images', postSlug);
+    await fs.mkdir(publicImageDir, { recursive: true });
+    const publicImagePath = path.join(publicImageDir, fileName);
+    await fs.writeFile(publicImagePath, buffer);
+
+    // 2. Save to 'content' directory so it gets tracked and pushed to the remote blogs repository
+    const contentImageDir = path.join(CONTENT_DIR, 'images', postSlug);
+    await fs.mkdir(contentImageDir, { recursive: true });
+    const contentImagePath = path.join(contentImageDir, fileName);
+    await fs.writeFile(contentImagePath, buffer);
 
     return `/blog/images/${postSlug}/${fileName}`;
 }

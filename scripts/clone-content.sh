@@ -21,6 +21,12 @@ fi
 
 echo "Blog content ready!"
 
+if [ -d "content/images" ]; then
+  echo "Copying blog images to public directory..."
+  mkdir -p public/blog/images
+  cp -r content/images/* public/blog/images/
+fi
+
 if [ "$NETLIFY" = "true" ] || [ "$CI" = "true" ]; then
   echo "Stripping .git folder for CI build to avoid secret exposure..."
   rm -rf content/.git
