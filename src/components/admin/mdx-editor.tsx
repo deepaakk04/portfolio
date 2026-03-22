@@ -121,13 +121,19 @@ export default function MDXEditor({ value, onChange }: MDXEditorProps) {
 
             if (res.ok) {
                 const data = await res.json();
-                const markdown = `![${file.name.split('.')[0]}](${data.url})`;
+                
+                let markdown = "";
+                if (file.name.toLowerCase().endsWith('.html')) {
+                    markdown = `\n<iframe src="${data.url}" width="100%" height="600px" style={{ border: 'none', borderRadius: '12px', background: 'transparent' }} title="${file.name.split('.')[0]}" />\n`;
+                } else {
+                    markdown = `![${file.name.split('.')[0]}](${data.url})`;
+                }
 
                 const editor = editorRef.current;
                 if (editor) {
                     const position = editor.getPosition();
                     if (position) {
-                        editor.executeEdits("image-upload", [
+                        editor.executeEdits("file-upload", [
                             {
                                 range: {
                                     startLineNumber: position.lineNumber,
@@ -172,7 +178,7 @@ export default function MDXEditor({ value, onChange }: MDXEditorProps) {
                 ref={fileInputRef}
                 onChange={handleImageUpload}
                 className="hidden"
-                accept="image/*"
+                accept="image/*,.html"
             />
 
             {/* Toolbar */}
