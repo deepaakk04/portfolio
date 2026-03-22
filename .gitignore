@@ -41,3 +41,5 @@ next-env.d.ts
 *.backup.mdx
 pnpm-lock.yaml
 ENV_SETUP.md
+content/
+public/blog/images/
