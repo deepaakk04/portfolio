@@ -43,11 +43,16 @@ export default function Page() {
                   words={["Technology Consultant", "Product Manager", "Technical Project Manager", "Business Analyst"]}
                 />
               </div>
-              <BlurFadeText
-                className="max-w-[600px] md:text-2xl"
-                delay={BLUR_FADE_DELAY}
-                text={DATA.description}
-              />
+              <BlurFade delay={BLUR_FADE_DELAY}>
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-2 text-sm md:text-lg text-muted-foreground font-medium max-w-[650px]">
+                  {DATA.description.split(" | ").map((text, i) => (
+                    <span key={text} className="flex items-center gap-3">
+                      {i > 0 && <span className="size-1 rounded-full bg-primary/40 block"></span>}
+                      <span className="text-foreground/80">{text.trim()}</span>
+                    </span>
+                  ))}
+                </div>
+              </BlurFade>
               <div className="flex flex-col md:flex-row gap-6 pt-4 pb-8">
                 <ContactForm
                   trigger={
