@@ -98,7 +98,7 @@ export const DATA: ResumeData = {
   description:
     "MBA Candidate at IIT Roorkee | Technologist turned Business Leader | Open to Consulting, Product & Technology Management",
   summary:
-    "I am a **Technology Consultant and MBA Candidate** with a deep foundation in **Data Engineering** and **Computer Science**.\n\nCurrently pursuing an **MBA at IIT Roorkee**, I combine business acumen with over **3 years of hands-on engineering experience** to build data-driven products. My background allows me to seamlessly bridge the gap between stakeholders and engineering teams, translating complex business requirements into scalable technical solutions.\n\nI excel at using **data analytics** to uncover user needs, optimize product roadmaps, and drive measurable growth. I am passionate about solving real-world problems through innovative, user-centric technology.",
+    "Currently pursuing an **MBA at IIT Roorkee**, I combine business acumen with over **3 years of hands-on engineering experience** to build data-driven products. My background allows me to seamlessly bridge the gap between stakeholders and engineering teams, translating complex business requirements into scalable technical solutions.\n\nI excel at using **data analytics** to uncover user needs, optimize product roadmaps, and drive measurable growth. I am passionate about solving real-world problems through innovative, user-centric technology.",
   avatarUrl: "/mee.jpg",
   skillGroups: [
     {

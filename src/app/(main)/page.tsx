@@ -100,9 +100,24 @@ export default function Page() {
             </div>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
-            <Markdown className="prose max-w-full text-pretty font-sans text-lg text-muted-foreground dark:prose-invert text-justify">
-              {DATA.summary}
-            </Markdown>
+            <div className="prose max-w-full text-pretty font-sans text-lg text-muted-foreground dark:prose-invert text-justify">
+              <div className="flex flex-wrap items-center gap-x-1.5 mb-2">
+                <span>I am a</span>
+                <WordRotate
+                  className="font-bold text-foreground -translate-y-[1px]"
+                  words={[
+                    "Technology Consultant",
+                    "Product Manager",
+                    "Technical Project Manager",
+                    "Business Analyst",
+                  ]}
+                />
+                <span>and MBA Candidate with a deep foundation in <strong className="font-bold text-foreground font-sans">Data Engineering</strong> and <strong className="font-bold text-foreground font-sans">Computer Science</strong>.</span>
+              </div>
+              <Markdown>
+                {DATA.summary}
+              </Markdown>
+            </div>
           </BlurFade>
         </div>
       </section>
