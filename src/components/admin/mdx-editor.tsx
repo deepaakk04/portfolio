@@ -178,7 +178,7 @@ export default function MDXEditor({ value, onChange }: MDXEditorProps) {
                 ref={fileInputRef}
                 onChange={handleImageUpload}
                 className="hidden"
-                accept="image/*,.html"
+                accept="image/*,text/html,.html"
             />
 
             {/* Toolbar */}
