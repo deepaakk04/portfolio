@@ -20,3 +20,8 @@ else
 fi
 
 echo "Blog content ready!"
+
+if [ "$NETLIFY" = "true" ] || [ "$CI" = "true" ]; then
+  echo "Stripping .git folder for CI build to avoid secret exposure..."
+  rm -rf content/.git
+fi
