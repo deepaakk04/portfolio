@@ -98,7 +98,7 @@ export const DATA: ResumeData = {
   description:
     "MBA Candidate at IIT Roorkee | Technologist turned Business Leader | Open to Consulting, Product & Technology Management",
   summary:
-    "I am a **Product Manager**  with a deep technical foundation in **Data Engineering** and **Computer Science**.\n\nCurrently pursuing an **MBA at IIT Roorkee**, I combine business acumen with over **3 years of hands-on engineering experience** to build data-driven products. My background allows me to seamlessly bridge the gap between stakeholders and engineering teams, translating complex business requirements into scalable technical solutions.\n\nI excel at using **data analytics** to uncover user needs, optimize product roadmaps, and drive measurable growth. I am passionate about solving real-world problems through innovative, user-centric technology.",
+    "I am a **Technology Consultant and MBA Candidate** with a deep foundation in **Data Engineering** and **Computer Science**.\n\nCurrently pursuing an **MBA at IIT Roorkee**, I combine business acumen with over **3 years of hands-on engineering experience** to build data-driven products. My background allows me to seamlessly bridge the gap between stakeholders and engineering teams, translating complex business requirements into scalable technical solutions.\n\nI excel at using **data analytics** to uncover user needs, optimize product roadmaps, and drive measurable growth. I am passionate about solving real-world problems through innovative, user-centric technology.",
   avatarUrl: "/mee.jpg",
   skillGroups: [
     {
@@ -194,16 +194,10 @@ export const DATA: ResumeData = {
       description: [
         "Designed and developed robust data pipelines using Hippo and Talend for significantly enhanced efficiency.",
         "Automated report generation tasks with Python, reducing reporting time by 80% and manual workload.",
-        "Led collaboration with cross-functional teams to implement innovative solutions aligned with organizational goals.",
         "Monitored data flow and resolved tickets in the initial project phase, achieving 99% incident resolution.",
         "Deployed scalable and efficient data solutions using Microsoft Azure Data Factory, resulting in cost savings.",
         "Optimized SQL queries in AWS Redshift for data extraction, reducing data retrieval time by over 35%.",
-        "Directed new team members during onboarding, ensuring smooth and seamless knowledge transfer.",
-        "Enhanced key workflow processes by applying Agile practices, achieving a 20% increase in efficiency.",
-        "Performed preliminary data exploration in Excel, leveraging Pivot Tables for comprehensive analysis.",
         "Performed thorough testing and validation of Tableau dashboards to ensure data accuracy and functionality.",
-        "Performed data copying in HDFS for development and testing, ensuring seamless availability throughout.",
-        "Analysed, reviewed, and documented progress using Jira and Confluence, identifying key areas of attention.",
       ],
     },
     {
@@ -251,11 +245,11 @@ export const DATA: ResumeData = {
       start: "2024",
       end: "Present",
       description: [
-        "Identified inefficiencies in the manual placement process involving repetitive Google Forms and lack of application tracking.",
-        "Conceptualized and developed a centralized Placement Portal with Role-Based Access Control (RBAC) to automate workflows.",
-        "Created a student dashboard enabling one-time profile registration, unified resume verification, and one-click applications.",
-        "Eliminated redundant data entry and provided students with real-time visibility into their application status (Order of Receipt).",
-        "Streamlined operations for the placement team, significantly reducing manual verification time and administrative overhead.",
+        "Led a cross-functional team to completely digitize and overhaul the centralized placement process for IIT Roorkee MBA.",
+        "Spearheaded corporate relations and outreach, successfully onboarding multiple new brands and recruiters for campus placements.",
+        "Conceptualized and directed the development of a centralized Placement Portal with Role-Based Access Control (RBAC), replacing fragmented Google Forms.",
+        "Mentored junior coordinators and streamlined administrative operations, reducing manual verification time and overhead by over 60%.",
+        "Fostered strong industry-academia partnerships, hosting pre-placement talks and leadership sessions to boost student employability.",
       ],
     },
   ],
@@ -281,7 +275,7 @@ export const DATA: ResumeData = {
   projects: [
     {
       title: "RAGify",
-      href: "",
+      href: "https://github.com/bdayceleb/raga",
       dates: "Jan 2026 - Mar 2026",
       active: true,
       description:
@@ -296,13 +290,7 @@ export const DATA: ResumeData = {
         "TailwindCSS",
         "Shadcn UI",
       ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/deepaksingh4/ragify",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
+      links: [],
       image: "/ragify.svg",
       video: "",
     },
