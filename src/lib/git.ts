@@ -50,6 +50,22 @@ export async function syncWithGithub(message: string): Promise<{ success: boolea
         }
 
         console.log("Git Sync Complete!");
+
+        // 5. Trigger Netlify Rebuild logic if Hook is provided
+        if (process.env.NETLIFY_BUILD_HOOK) {
+            console.log("Triggering Netlify rebuild...");
+            try {
+                const response = await fetch(process.env.NETLIFY_BUILD_HOOK, { method: "POST" });
+                if (response.ok) {
+                    console.log("Netlify rebuild triggered successfully.");
+                } else {
+                    console.error("Failed to trigger Netlify rebuild:", response.statusText);
+                }
+            } catch (hookErr: any) {
+                console.error("Error triggering Netlify rebuild:", hookErr.message);
+            }
+        }
+
         return { success: true };
     } catch (error: any) {
         console.error("Git Sync Failed:", error);
